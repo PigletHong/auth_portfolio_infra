@@ -20,6 +20,17 @@ CREATE TABLE `db_auth`.`tb_auth_wallet` (
   PRIMARY KEY (`service_id`, `network`, `address`)
 );
 
+CREATE TABLE `db_auth`.`tb_auth_email` (
+  `service_id` varchar(255) COMMENT '서비스 ID',
+  `email` varchar(255) COMMENT 'Email 주소',
+  `password` varchar(255) NOT NULL COMMENT '이메일 비밀번호',
+  `verify_yn` tinyint NOT NULL DEFAULT 0 COMMENT '이메일 인증 여부',
+  `account_key` varchar(255) NOT NULL COMMENT 'Account 연동 키',
+  `link_key` varchar(255) NOT NULL COMMENT 'Email 연동 키',
+  `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 날짜',
+  PRIMARY KEY (`service_id`, `email`)
+);
+
 CREATE TABLE `db_auth`.`tb_auth_passkey` (
   `service_id` varchar(255) COMMENT '서비스 ID',
   `passkey_id` varchar(255) COMMENT 'Passkey ID',
