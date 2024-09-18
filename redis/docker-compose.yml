@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379"  # Redis 기본 포트
+    volumes:
+      - redis_data:/data  # 데이터 지속성을 위한 볼륨
+
+volumes:
+  redis_data:
+

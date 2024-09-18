@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: password # MySQL root 비밀번호
+      MYSQL_DATABASE: mydatabase  # 기본 데이터베이스 이름
+      MYSQL_USER: user  # 일반 사용자
+      MYSQL_PASSWORD: password  # 일반 사용자 비밀번호
+    ports:
+      - "3306:3306"  # MySQL 기본 포트
+    volumes:
+      - mysql_data:/var/lib/mysql  # 데이터 지속성을 위한 볼륨
+
+volumes:
+  mysql_data:
+
