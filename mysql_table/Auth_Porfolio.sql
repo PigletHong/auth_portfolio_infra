@@ -1,38 +1,34 @@
 CREATE SCHEMA `db_auth`;
 
 CREATE TABLE `db_auth`.`tb_auth_social` (
-  `service_id` varchar(255) COMMENT '서비스 ID',
   `provider` varchar(255) COMMENT '제공자 ex)google',
   `social_id` varchar(255) COMMENT '소셜 유니크 ID',
   `account_key` varchar(255) NOT NULL COMMENT 'Account 연동 키',
   `link_key` varchar(255) NOT NULL COMMENT 'Social 연동 키',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 날짜',
-  PRIMARY KEY (`service_id`, `provider`, `social_id`)
+  PRIMARY KEY (`provider`, `social_id`)
 );
 
 CREATE TABLE `db_auth`.`tb_auth_wallet` (
-  `service_id` varchar(255) COMMENT '서비스 ID',
   `network` varchar(255) COMMENT 'Wallet 네트워크',
   `address` varchar(255) COMMENT 'Wallet 주소',
   `account_key` varchar(255) NOT NULL COMMENT 'Account 연동 키',
   `link_key` varchar(255) NOT NULL COMMENT 'Wallet 연동 키',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 날짜',
-  PRIMARY KEY (`service_id`, `network`, `address`)
+  PRIMARY KEY (`network`, `address`)
 );
 
 CREATE TABLE `db_auth`.`tb_auth_email` (
-  `service_id` varchar(255) COMMENT '서비스 ID',
   `email` varchar(255) COMMENT 'Email 주소',
   `password` varchar(255) NOT NULL COMMENT '이메일 비밀번호',
   `verify_yn` tinyint NOT NULL DEFAULT 0 COMMENT '이메일 인증 여부',
   `account_key` varchar(255) NOT NULL COMMENT 'Account 연동 키',
   `link_key` varchar(255) NOT NULL COMMENT 'Email 연동 키',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 날짜',
-  PRIMARY KEY (`service_id`, `email`)
+  PRIMARY KEY (`email`)
 );
 
 CREATE TABLE `db_auth`.`tb_auth_passkey` (
-  `service_id` varchar(255) COMMENT '서비스 ID',
   `passkey_id` varchar(255) COMMENT 'Passkey ID',
   `public_key` text NOT NULL COMMENT 'Paaskey 인증서 퍼블릭 키',
   `user_handle` varchar(255) NOT NULL,
@@ -42,16 +38,15 @@ CREATE TABLE `db_auth`.`tb_auth_passkey` (
   `account_key` varchar(255) NOT NULL COMMENT 'Account 연동 키',
   `link_key` varchar(255) NOT NULL COMMENT 'Passkey 연동 키',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 시간',
-  PRIMARY KEY (`service_id`, `passkey_id`)
+  PRIMARY KEY (`passkey_id`)
 );
 
 CREATE TABLE `db_auth`.`tb_auth_guest` (
-  `service_id` varchar(255) COMMENT '서비스 ID',
   `device_id` varchar(255) COMMENT '디아비스 ID',
   `account_key` varchar(255) NOT NULL COMMENT 'Account 연동 키',
   `link_key` varchar(255) NOT NULL COMMENT 'Guest 연동 키',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 시간',
-  PRIMARY KEY (`service_id`, `device_id`)
+  PRIMARY KEY (`device_id`)
 );
 
 CREATE TABLE `db_auth`.`tb_auth_account` (
@@ -116,10 +111,9 @@ CREATE TABLE `db_auth`.`tb_auth_social_personal_information` (
 
 CREATE TABLE `db_auth`.`tb_auth_project_information` (
   `project_id` varchar(255) COMMENT '프로젝트 ID',
-  `service_id` varchar(255) COMMENT '서비스 ID',
   `project_display_name` varchar(255) NOT NULL COMMENT '프로젝트 디스플레이명',
   `reg_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록 시간',
-  PRIMARY KEY (`project_id`, `service_id`)
+  PRIMARY KEY (`project_id`)
 );
 
 ALTER TABLE `db_auth`.`tb_auth_social` COMMENT = 'Social 맵핑 테이블';
